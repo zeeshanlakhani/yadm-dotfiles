@@ -1,0 +1,36 @@
+[color]
+ diff = auto
+ status = auto
+ branch = auto
+ ui = auto
+ interactive = auto
+ pager = true
+[color "branch"]
+ current = red
+ local = red
+ remote = green
+[color "diff"]
+ meta = yellow bold
+ frag = magenta bold
+ old = red bold
+ new = green bold
+[color "status"]
+ added = yellow
+ changed = green
+ untracked = cyan
+[core]
+ editor = /usr/local/bin/mg -n
+ excludesfile = /Users/zlakha200/.gitignore_global
+ autocrlf = input
+[alias]
+ last = cat-file commit HEAD
+ lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+ root = !pwd
+[merge]
+ stat = true
+[init]
+ templatedir = ~/.git_template
+[include]
+ path = .localrc/.gitconfig
+[push]
+ default = simple
