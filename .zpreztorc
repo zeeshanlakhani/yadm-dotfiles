@@ -37,7 +37,6 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'ocaml' \
   'haskell' \
-  'python' \
   'ruby' \
   'rsync' \
   'pacman' \
@@ -166,4 +165,4 @@ zstyle ':prezto:module:prompt' theme 'agnoster'
 # zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 
 # Integrate with iTerm2.
-# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+zstyle ':prezto:module:tmux:iterm' integrate 'yes'

@@ -33,15 +33,13 @@ export HISTFILE=~/.zsh_history
 # COMPLETION_WAITING_DOTS="true"
 
 # exports and sets
-export PATH=~/.local/bin:/usr/local/bin:/usr/local/opt/bison/bin:/usr/local:/usr/local/sbin:~/.cargo/bin:~/.erln8.d/bin:~/Library/Haskell/bin:~/.cabal/bin:~/:/Applications/racket/bin:/Applications/racket/lib:~/julia:/usr/local/share/npm/bin:$GOPATH/bin:/Applications/Racket:/usr/local/Cellar/smlnj/110.75/libexec/bin:~/bin:~/Applications/chromedriver:/usr/bin:/bin:/usr/sbin:/sbin:/mono64/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/usr/texbin:~/.jenv/bin:~/lfe/bin:~/kjell:~/erlang/libs/cuter:~/rebar3:/opt/X11/bin:~/$PATH
-export MYPYPATH=/usr/local/lib/python3.5/site-packages:/usr/local/lib/python3.6/site-packages:/usr/local/lib/python2.7/site-packages:~/.opam
+export PATH=~/.emacs.d/bin:~/.local/bin:~/.pyenv/shims:/usr/local/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/bison/bin:/usr/local:/usr/local/sbin:~/.cargo/bin:~/.erln8.d/bin:~/.ghcup/env:~/Library/Haskell/bin:~/.cabal/bin:~/:~/.agda:/Applications/racket/bin:/Applications/racket/lib:~/julia:/usr/local/share/npm/bin:$GOPATH/bin:/Applications/Racket:~/bin:/usr/bin:/bin:/usr/sbin:/sbin:/mono64/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/usr/texbin:~/rebar3:/opt/X11/bin:/usr/local/smlnj/bin:~/$PATH
 FC=/usr/local/bin/gfortran
 TERM=xterm-256color
 WORKON_HOME=$HOME/.virtualenvs
 export RLWRAP_HOME="$HOME/.rlwrap"
 export GTAGSCONF=/usr/local/share/gtags/gtags.conf
 export GTAGSLABEL=ctags
-export RUST_SRC_PATH="$HOME/rust/src"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export ZILKER_TOP="/Users/zlakha200/occam/zilker-client"
@@ -65,11 +63,7 @@ alias git-root='cd $(git rev-parse --show-toplevel)'
 alias gfz='git fetch'
 alias gs='git status'
 alias ppj='python -m json.tool'
-alias sml='rlwrap sml'
-alias emacsd='/Applications/Emacs.app/Contents/MacOS/Emacs --daemon'
-alias em='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient --no-wait'
-alias emn='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c --no-wait'
-alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
+alias emn='/usr/local/opt/emacs-plus/bin/emacsclient -nc'
 alias killem='pkill -TERM -u $USER Emacs'
 alias elcpurge='find ~/.emacs.d -name "*.elc" -print | xargs rm -f'
 alias elpapurge='rm -Rf ~/.emacs.d/elpa/*'
@@ -79,9 +73,9 @@ alias py='python3'
 alias gcc='gcc-8'
 alias rust-gdb='sudo rust-gdb'
 alias mg='mg -n'
-alias rusti='rustup run nightly-2016-08-01 ~/.cargo/bin/rusti'
 alias nproc='sysctl -n hw.physicalcpu'
 alias pdflatex='pdflatex -shell-escape'
+alias sml='rlwrap sml'
 
 # functions
 skill () {
@@ -147,8 +141,6 @@ fi
 # set JAVA_HOME
 # export JAVA_HOME=$(/usr/libexec/java_home)
 
-# eval "$(jenv init -)"
-
 # OPAM configuration
 #. /home/zlakha200/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 eval `opam config env`
@@ -177,3 +169,11 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# rust
+export RUST_SRC_PATH=${HOME}/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src
+CARGO=${HOME}/.cargo/bin/cargo
