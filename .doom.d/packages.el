@@ -56,6 +56,7 @@
 (package! dune)
 (package! flycheck-ocaml)
 (package! merlin)
+(package! utop)
 (package! reason-mode :recipe
   (:host github
    :repo "reasonml-editor/reason-mode"))

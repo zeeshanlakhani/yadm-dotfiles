@@ -108,7 +108,7 @@
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :lang
-       agda                ; types of types of types of types...
+       (agda +local)       ; types of types of types of types...
        cc                  ; C/C++/Obj-C (message "")adness
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
@@ -152,7 +152,7 @@
         +publish)          ; Emacs+Org as a static site generator organize your plain life in plain text
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
-       plantuml            ; diagrams for confusing people more
+       ;; plantuml         ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python +pyenv)     ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
@@ -162,7 +162,7 @@
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        scala               ; java, but good
-       scheme              ; a fully conniving family of lisps
+       ;; scheme           ; a fully conniving family of lisps
        (sh +zsh)           ; she sells {ba,z,fi}sh shells on the C xor
        sml
        ;solidity           ; do you need a blockchain? No.

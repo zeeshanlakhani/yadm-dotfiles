@@ -51,6 +51,10 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+;; smoother scrolling
+(setq scroll-step 1
+      scroll-margin 1)
+
 ;; Load snippets
 (after! yasnippet
   (push (expand-file-name "snippets/" doom-private-dir) yas-snippet-dirs))
@@ -99,11 +103,8 @@
 
 ;; pretty-mode/code
 (setq +pretty-code-enabled-modes
-      '(not c-mode
-        not c++-mode
-        not typescript-mode
-        not rustic-mode
-        not reason-mode))
+      '(emacs-lisp-mode org-mode clojure-mode racket-mode latex-mode
+                        scheme-mode haskell-mode fsharp-mode markdown-mode))
 
 ;; loads
 (load! "+bindings")
