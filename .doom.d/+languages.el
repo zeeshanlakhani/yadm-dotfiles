@@ -7,8 +7,7 @@
         lsp-before-save-edits t
         lsp-enable-semantic-highlighting t
         lsp-describe-thing-at-point t
-        lsp-enable-snippet t)
-  (lsp-treemacs-sync-mode 1))
+        lsp-enable-snippet t))
 
 ;; rust
 (after! (rustic lsp lsp-ui)
