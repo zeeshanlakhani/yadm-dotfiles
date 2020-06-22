@@ -114,8 +114,6 @@ eval "$(rbenv init -)"
 # Disable AutoCorrect
 unsetopt correct_all
 
-# Cabal
-
 # ghc-pkg-reset
 # Removes all installed GHC/cabal packages, but not binaries, docs, etc.
 # Use this to get out of dependency hell and start over, at the cost of some rebuilding time.
