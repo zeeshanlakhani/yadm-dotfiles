@@ -46,11 +46,13 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
-(package! graphql-mode)
-(package! graphql)
 (package! helm-dash)
 (package! kubernetes)
 (package! nyan-mode)
+
+;; graphql
+(package! graphql-mode)
+(package! graphql)
 
 ;; ocaml/reason
 (package! dune)
@@ -62,8 +64,11 @@
    :repo "reasonml-editor/reason-mode"))
 (package! tuareg)
 
+;; racket
+(package! dr-racket-like-unicode)
+
 ;; markdown
 (package! vmd-mode)
 
-;; racket
-(package! dr-racket-like-unicode)
+;; toml
+(package! toml-mode)

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>+languages.html</title>
+<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8"/>
+<link rel="stylesheet" type="text/css" media="all" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.min.css"  />
+<link rel="stylesheet" type="text/css" media="all" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/github.min.css"  /><meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'><style> body { box-sizing: border-box; max-width: 740px; width: 100%; margin: 40px auto; padding: 0 10px; } </style><script src='https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js'></script><script>document.addEventListener('DOMContentLoaded', () => { document.body.classList.add('markdown-body'); document.querySelectorAll('pre[lang] > code').forEach((code) => { code.classList.add(code.parentElement.lang); }); document.querySelectorAll('pre > code').forEach((code) => { hljs.highlightBlock(code); }); });</script>
+</head>
+
+<body>
+
+<p>;;; ~/.doom.d/languages.el -<em>- lexical-binding: t; -</em>-</p>
+<p>;; lsp
+(after! lsp
+  (setq lsp-prefer-capf t
+        lsp-auto-execute-action t
+        lsp-before-save-edits t
+        lsp-enable-semantic-highlighting t
+        lsp-describe-thing-at-point t
+        lsp-enable-snippet t))</p>
+<p>;; rust/rustic
+(after! rustic
+  (setq lsp-rust-server &#39;rust-analyzer)
+  (setq rustic-lsp-server &#39;rust-analyzer))</p>
+<p>(after! (rustic lsp lsp-ui)
+  (setq lsp-rust-full-docs t
+        lsp-rust-analyzer-display-chaining-hints t
+        rustic-lsp-client &#39;eglot
+        rustic-format-trigger &#39;on-save
+        rust-format-on-save t))</p>
+<p>(add-hook! rustic-mode lsp-rust-analyzer-inlay-hints-mode)
+(add-hook! rustic-mode &#39;smartparens-mode)</p>
+<p>;; reasonml
+(defun reason/rtop-prompt ()
+  &quot;The rtop prompt function.&quot;
+  (let ((prompt (format &quot;rtop[%d]&gt; &quot; utop-command-number)))
+    (add-text-properties 0 (length prompt) &#39;(face utop-prompt) prompt)
+    prompt))</p>
+<p>(after! lsp-clients
+  (setq lsp-response-timeout 180)
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection
+    (lsp-stdio-connection
+     (executable-find &quot;/usr/local/bin/reason-language-server&quot;))
+    :major-modes &#39;(reason-mode)
+    :notification-handlers (ht (&quot;client/registerCapability&quot; &#39;ignore))
+    :priority 1
+    :server-id &#39;reason-ls)))</p>
+<p>;; ## added by OPAM user-setup for emacs / base
+;; ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
+(require &#39;opam-user-setup &quot;~/.doom.d/opam-user-setup.el&quot;)
+;; ## end of OPAM user-setup addition for emacs / base ## keep this line</p>
+<p>(add-hook! reason-mode
+  (add-hook &#39;before-save-hook #&#39;refmt-before-save nil t))</p>
+<p>(add-hook! reason-mode #&#39;lsp-deferred)
+(add-hook! reason-mode &#39;smartparens-mode)
+(after! reason-mode
+  (setq utop-command &quot;rtop -emacs&quot;
+        utop-edit-command nil
+        utop-prompt &#39;reason/rtop-prompt
+        utop-initial-command &quot;let myVar = &quot;Hello Reason!&quot;;&quot;
+        utop-phrase-terminator &quot;;&quot;)
+  (add-hook &#39;reason-mode-hook #&#39;utop-minor-mode))
+(set-repl-handler! &#39;reason-mode #&#39;utop)
+(set-eval-handler! &#39;reason-mode #&#39;utop-eval-region)</p>
+<p>;; agda
+(load-file (let ((coding-system-for-read &#39;utf-8))
+                (shell-command-to-string &quot;agda-mode locate&quot;)))</p>
+<p>;; Using the input method of Agda in LaTeX files.
+(require &#39;agda-input)
+(add-hook &#39;LaTeX-mode-hook
+          (lambda () (set-input-method &quot;Agda&quot;)))</p>
+<p>(map! :leader
+    :nv &quot;a&quot; nil
+    (:prefix &quot;a&quot;
+    :n &quot;l&quot; #&#39;agda2-load))</p>
+<p>;; markdown
+(add-hook! (gfm-mode markdown-mode) #&#39;visual-line-mode #&#39;turn-off-auto-fill)</p>
+<p>;; ispell
+ (setq ispell-program-name &quot;ispell&quot;
+    ispell-dictionary &quot;en_US&quot;
+    ispell-local-dictionary &quot;american&quot;)</p>
+<p>;; web mode
+(after! web-mode
+  (set-formatter! &#39;html-tidy nil))</p>
+
+
+</body>
+</html>

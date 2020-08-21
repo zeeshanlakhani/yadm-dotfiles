@@ -15,3 +15,8 @@
 
 ;; racket
 (global-set-key (kbd "C-\\") 'dr-racket-like-unicode-char)
+
+;; markdown
+(map! :after vmd
+  :mode markdown-mode
+  :n "SPC m p" #'vmd-mode)

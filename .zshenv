@@ -61,9 +61,10 @@ fi
 # aliases
 alias git-root='cd $(git rev-parse --show-toplevel)'
 alias gfz='git fetch'
+alias co-pr=!sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
 alias gs='git status'
 alias ppj='python -m json.tool'
-alias emn='/usr/local/opt/emacs-plus/bin/emacsclient -nc'
+alias emn='/usr/local/opt/emacs-plus@28/bin/emacsclient -nc'
 alias killem='pkill -TERM -u $USER Emacs'
 alias elcpurge='find ~/.emacs.d -name "*.elc" -print | xargs rm -f'
 alias elpapurge='rm -Rf ~/.emacs.d/elpa/*'
@@ -76,6 +77,7 @@ alias mg='mg -n'
 alias nproc='sysctl -n hw.physicalcpu'
 alias pdflatex='pdflatex -shell-escape'
 alias sml='rlwrap sml'
+alias gpleaf='git pull overleaf master --allow-unrelated-histories'
 
 # functions
 skill () {

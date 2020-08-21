@@ -24,14 +24,6 @@
 (add-hook! rustic-mode lsp-rust-analyzer-inlay-hints-mode)
 (add-hook! rustic-mode 'smartparens-mode)
 
-;; markdown
-(use-package! vmd-mode
-  :commands vmd-mode
-  :init
-  (map! :map markdown-mode-map
-        (:localleader
-         "v" #'vmd-mode)))
-
 ;; reasonml
 (defun reason/rtop-prompt ()
   "The rtop prompt function."
@@ -84,3 +76,11 @@
     :nv "a" nil
     (:prefix "a"
     :n "l" #'agda2-load))
+
+;; markdown
+(add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
+
+;; ispell
+ (setq ispell-program-name "ispell"
+    ispell-dictionary "en_US"
+    ispell-local-dictionary "american")

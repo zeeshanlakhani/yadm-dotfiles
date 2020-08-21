@@ -101,11 +101,6 @@
 ;; special newline madness
 (setq require-final-newline t)
 
-;; pretty-mode/code
-(setq +pretty-code-enabled-modes
-      '(emacs-lisp-mode org-mode clojure-mode racket-mode latex-mode
-                        scheme-mode haskell-mode fsharp-mode markdown-mode))
-
 ;; loads
 (load! "+bindings")
 (load! "+languages")
