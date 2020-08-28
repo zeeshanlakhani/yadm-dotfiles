@@ -49,6 +49,7 @@
 (package! helm-dash)
 (package! kubernetes)
 (package! nyan-mode)
+(package! mac-pseudo-daemon :disable (not IS-MAC))
 
 ;; graphql
 (package! graphql-mode)
@@ -63,6 +64,14 @@
   (:host github
    :repo "reasonml-editor/reason-mode"))
 (package! tuareg)
+
+;; elixir/erlang
+(package! exec-path-from-shell)
+(package! exunit)
+(package! mix)
+
+;; direnv
+(package! direnv)
 
 ;; racket
 (package! dr-racket-like-unicode)

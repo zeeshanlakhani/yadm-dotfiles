@@ -16,10 +16,13 @@
 ;; + `doom-variable-pitch-font'
 ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
-;;
+
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Ubuntu Mono derivative Powerline" :size 9))
+(setq doom-font (font-spec :family "Fira Code" :size 11)
+      doom-variable-pitch-font (font-spec :family "Fira Code")
+      doom-unicode-font (font-spec :family "Fira Code")
+      doom-big-font (font-spec :family "Fira Code" :size 19))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -50,6 +53,12 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+;; fonts and macs
+(when IS-MAC
+  (when (fboundp 'mac-auto-operator-composition-mode)
+    (mac-auto-operator-composition-mode))
+  (mac-pseudo-daemon-mode))
 
 ;; smoother scrolling
 (setq scroll-step 1
@@ -101,6 +110,17 @@
 ;; special newline madness
 (setq require-final-newline t)
 
+;; direnv
+(use-package! direnv
+  :config
+  (direnv-mode)
+  (setq direnv-always-show-summary nil))
+
 ;; loads
-(load! "+bindings")
 (load! "+languages")
+(load! "+bindings")
+
+;; server start
+(use-package server
+  :config
+  (unless (server-running-p) (server-start)))
