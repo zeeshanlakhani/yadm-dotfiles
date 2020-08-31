@@ -1,4 +1,5 @@
 source ~/.fish_aliases
+source ~/.local/.aliases
 source ~/.fish_variables
 
 set -g theme_date_timezone America/New_York

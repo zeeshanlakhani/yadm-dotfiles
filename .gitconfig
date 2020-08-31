@@ -42,3 +42,5 @@
     email = zeeshan.lakhani@gmail.com
 [includeIf "gitdir:~/blockfi/"]
     path = ~/.gitconfig-blockfi
+[url "git@github.com:"]
+	insteadOf = https://github.com/

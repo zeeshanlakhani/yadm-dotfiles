@@ -116,6 +116,13 @@
   (direnv-mode)
   (setq direnv-always-show-summary nil))
 
+(when IS-MAC
+  (setq exec-path-from-shell-variables
+        '("PATH" "MANPATH" "SSH_CLIENT" "HOSTNAME"  "GTAGSCONF" "GTAGSLABEL"
+          "RUST_SRC_PATH" "HISTFILE" "HOME" "GOPATH" "GOROOT" "GOEXEC"))
+(exec-path-from-shell-initialize))
+
+
 ;; loads
 (load! "+languages")
 (load! "+bindings")
