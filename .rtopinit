@@ -1,0 +1,8 @@
+let () =
+  try (Topdirs.dir_directory(Sys.getenv("OCAML_TOPLEVEL_PATH"))) {
+  | Not_found => ()
+  };
+
+#thread;
+#require "base";
+open Base;

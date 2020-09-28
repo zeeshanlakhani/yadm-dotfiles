@@ -122,6 +122,12 @@
           "RUST_SRC_PATH" "HISTFILE" "HOME" "GOPATH" "GOROOT" "GOEXEC"))
 (exec-path-from-shell-initialize))
 
+;; markdown
+(require 'auth-source)
+(after! grip
+   (let ((credential (auth-source-user-and-password "api.github.com")))
+      (setq grip-github-user (car credential)
+            grip-github-password (cadr credential))))
 
 ;; loads
 (load! "+languages")
