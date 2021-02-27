@@ -1,0 +1,37 @@
+#
+# Unison preferences file
+#
+
+# Roots of the synchronization
+root = /Users/zeeshanlakhani/blockfi
+root = ssh://thelio//home/zeeshanlakhani/blockfi
+
+# Paths to synchronize
+#path = sample1
+#path = sample2
+
+# Some regexps specifying names and paths to ignore
+#ignore = Path sample   ## ignores /mnt/store/martin/sample
+#ignore = Path sample/* ## ignores /mnt/store/martin/sample/*
+#ignore = Path */sample ## ignores /mnt/store/martin/somedir/sample,
+#                       ## but not /mnt/store/martin/a/b/c/sample
+#ignore = Name *sample  ## ignores all files/directories that end with "sample"
+#ignore = Name sample*  ## ignores all files/directories that begin with
+#                       ## "sample"
+#ignore = Name *.tmp    ## ignores all files with the extension .tmp
+
+ignore = Path */.git
+ignore = Path */node_modules
+ignore = Path */target
+
+auto = true
+batch = true
+confirmbigdel = true
+fastcheck = true
+prefer = newer
+silent = true
+times = true
+repeat = watch
+
+# group=true
+# owner=true
