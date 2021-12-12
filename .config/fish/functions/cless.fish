@@ -1,8 +1,6 @@
-#!/usr/bin/env fish
-
 # colors documentation can be found at
 # http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#256-colors
-function man --wraps man -d "Run man with added colors"
+function cless -d "Configure less to colorize styled text using environment variables before executing a command that will use less"
     set -l bold_ansi_code "\u001b[1m"
     set -l underline_ansi_code "\u001b[4m"
     set -l reversed_ansi_code "\u001b[7m"
@@ -17,5 +15,6 @@ function man --wraps man -d "Run man with added colors"
     set -x LESS_TERMCAP_ue (printf $reset_ansi_code) # end underline
     set -x LESS_TERMCAP_so (printf $reversed_ansi_code$gold_ansi_code) # start standout
     set -x LESS_TERMCAP_se (printf $reset_ansi_code) # end standout
-    command man $argv
+
+    $argv
 end

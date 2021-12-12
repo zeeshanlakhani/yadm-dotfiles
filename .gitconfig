@@ -20,7 +20,7 @@
     untracked = cyan
 [core]
     editor = /usr/local/bin/mg -n
-    excludesfile = /Users/zeeshanlakhani/.gitignore_global
+    excludesfile = /Users/zeeshan/.gitignore_global
     autocrlf = input
 [alias]
     last = cat-file commit HEAD
@@ -32,11 +32,6 @@
     path = .local/.gitconfig
 [push]
     default = simple
-[filter "lfs"]
-    process = git-lfs filter-process
-    required = true
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
 [user]
     name = Zeeshan Lakhani
     email = zeeshan.lakhani@gmail.com
@@ -44,3 +39,5 @@
     path = ~/.gitconfig-blockfi
 [url "git@github.com:"]
     insteadOf = https://github.com/
+[init]
+	defaultBranch = main

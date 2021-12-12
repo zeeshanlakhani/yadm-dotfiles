@@ -23,12 +23,22 @@
 ;; markdown
 (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
 
+;; protobuf
+
+(use-package! protobuf-mode
+  :defer-incrementally t)
+
 ;; ispell
  (setq ispell-program-name "ispell"
     ispell-dictionary "en_US"
     ispell-local-dictionary "american")
 
+;; dhall
+(use-package! dhall-mode
+  :mode "\\.dhall$")
+
 ;; loads
 (load! "+elixir")
 (load! "+rust")
 (load! "+reason")
+(load! "+twelf")

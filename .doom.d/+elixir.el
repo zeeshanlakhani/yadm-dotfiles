@@ -1,23 +1,12 @@
 ;;; ~/.doom.d/+elixir.el -*- lexical-binding: t; -*-
 
-(after! lsp-clients
-  (setq lsp-file-watch-ignored (append lsp-file-watch-ignored '("deps/" "_build/" ".elixir_ls/" "assets/" ".circleci/" "docs/")))
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection
-    (lsp-stdio-connection
-     (expand-file-name "~/.elixirls/release/language_server.sh"))
-    :major-modes '(elixir-mode)
-    :priority -1
-    :server-id 'elixir-ls
-    :initialized-fn (lambda (workspace)
-                      (with-lsp-workspace workspace
-                        (let ((config `(:elixirLS
-                                        (:mixEnv "dev"
-                                         :dialyzerEnabled
-                                         :json-false))))
-                          (lsp--set-configuration config)))))))
+(use-package! lsp-mode
+  :hook (elixir-mode . lsp)
+  :init (setq lsp-elixir-dialyzer-enabled t
+              lsp-elixir-project-dir ""))
 
+(after! lsp-mode
+  (lsp-register-custom-settings '(("elixirLS.mixEnv" "dev"))))
 
 (after! lsp-ui
   (setq lsp-ui-doc-enable t
@@ -32,22 +21,26 @@
         lsp-ui-sideline-code-actions-prefix "💡"
         company-lsp-match-candidate-predicate #'company-lsp-match-candidate-prefix))
 
-(map! :prefix "g"
-      :ne "p" #'lsp-ui-peek-find-definitions
-      :ne "P" #'lsp-ui-peek-find-references)
-
 (use-package! exec-path-from-shell
   :init (exec-path-from-shell-initialize))
 
 (use-package! exunit
   :hook (elixir-mode . exunit-mode))
 
-(use-package! lsp-elixir
-  :hook (elixir-mode . lsp))
+(use-package! forge
+  :config (setq forge-topic-list-limit '(10 . 0)))
 
 (use-package! mix
   :hook (elixir-mode . mix-minor-mode)
   :config (setq compilation-scroll-output t))
+
+(defun exunit-kill-compilation ()
+  "Kill *exunit-compilation* buffer and window."
+  (interactive)
+  (let* ((bname "*exunit-compilation*")
+         (window (get-buffer-window bname)))
+    (delete-window window)
+    (kill-buffer bname)))
 
 (defun mix/mix ()
   "Run mix command in project or sub-project."
@@ -68,30 +61,58 @@
         (default-directory (exunit-project-root)))
     (save-buffer)
     (shell-command (s-join " " `("mix" "format" ,file-to-format)))
-    (find-file file-to-format)))
+    (revert-buffer :ignore-auto :noconfirm :preserve)))
+
+(defun projectile-yank-line-number ()
+  "Copy current line in file to clipboard, relative to project root."
+  (interactive)
+  (let* ((line-no (number-to-string (line-number-at-pos)))
+         (path-from-root (file-relative-name (buffer-file-name) (projectile-project-root)))
+         (from-root-with-line (concat path-from-root ":" line-no)))
+    (kill-new from-root-with-line)
+    (message from-root-with-line)))
+
+(defun display-elixir-output (buffer)
+  "Display elixir compiler output BUFFER IGNORE."
+  (let* ((frame (select-frame-by-name "TEST OUTPUT"))
+        (window (car (window-list frame))))
+    (select-window window)
+    (display-buffer-same-window buffer nil)
+    (display-buffer-record-window 'reuse window buffer)
+    (select-frame-set-input-focus (old-selected-frame))
+    window)
+  )
+
+;; keybindings
+(map! :prefix "g"
+      :ne "p" #'lsp-ui-peek-find-definitions
+      :ne "P" #'lsp-ui-peek-find-references)
+
+(map! :leader
+      :prefix "p"
+      :ne "y" #'projectile-yank-line-number
+      :prefix "w"
+      :ne "C-d" #'ace-delete-window
+      :ne "C-p" #'popwin:close-popup-window)
+
+(map! :leader
+      :prefix ("w")
+      :desc "Delete Other Window" :ne "D" #'ace-delete-window
+      :desc "Switch Window" :ne "<tab>" #'ace-window)
 
 (map! :mode elixir-mode
       :localleader
-      ;; SPC m ...
-      :desc "Format buffer" :ne "=" #'mix/format-buffer
-      :desc "Run mix in project" :ne "m" #'mix/mix
-      :desc "Run mix in umbrella" :ne "u" #'mix/mix-umbrella
-      ;; SPC m l ...
-      :prefix ("l" . "Linting")
-      :desc "Next error" :ne "n" #'flycheck-next-error
-      :desc "Previous error" :ne "N" #'flycheck-previous-error
-      :desc "List errors" :ne "l" #'flycheck-list-errors
-      ;; SPC m t ...
+      :ne "=" #'mix/format-buffer
+      :ne "m" #'mix-execute-task
+      :ne "u" #'mix/execute-task-umbrella
       :prefix ("t" . "Testing")
-      :desc "App" :ne "a" #'exunit-verify-all
-      :desc "Buffer" :ne "b" #'exunit-verify
-      :desc "Retry" :ne "r" #'exunit-rerun
-      :desc "At point" :ne "t" #'exunit-verify-single
-      :desc "Umbrella" :ne "u" #'exunit-verify-all-in-umbrella
-      :desc "Toggle file" :ne "<tab>" #'exunit-toggle-file-and-test
-      :desc "Toggle file other window" :ne "<backtab>" #'exunit-toggle-file-and-test-other-window)
+      :ne "<backtab>" #'exunit-toggle-file-and-test-other-window
+      :ne "<tab>" #'exunit-toggle-file-and-test
+      :ne "a" #'exunit-verify-all
+      :ne "b" #'exunit-verify
+      :ne "q" #'exunit-kill-compilation
+      :ne "r" #'exunit-rerun
+      :ne "t" #'exunit-verify-single
+      :ne "u" #'exunit-verify-all-in-umbrella)
 
-(map! :leader
-      :desc "Run shell command" :ne "!" #'shell-command
-      :prefix "w" :ne "C-d" #'ace-delete-window
-      :prefix "w" :ne "C-p" #'projectile-find-file-other-window)
+(push '("\\*exunit-compilation\\*" display-elixir-output) display-buffer-alist)

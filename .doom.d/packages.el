@@ -46,6 +46,7 @@
 ;; our package manager can't deal with; see raxod502/straight.el#279)
 ;(package! builtin-package :recipe (:branch "develop"))
 
+(package! dhall-mode)
 (package! helm-dash)
 (package! kubernetes)
 (package! nyan-mode)
@@ -79,5 +80,13 @@
 ;; markdown
 (package! vmd-mode)
 
+;; protobuf
+(package! protobuf-mode
+  :recipe (:host github :repo "protocolbuffers/protobuf"
+           :files ("editors/protobuf-mode.el")))
+
 ;; toml
 (package! toml-mode)
+
+;; lsp
+(package! lsp-origami)

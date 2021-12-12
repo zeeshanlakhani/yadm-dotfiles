@@ -19,10 +19,10 @@
 
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Fira Code" :size 11)
+(setq doom-font (font-spec :family "Fira Code" :size 10)
       doom-variable-pitch-font (font-spec :family "Fira Code")
       doom-unicode-font (font-spec :family "Fira Code")
-      doom-big-font (font-spec :family "Fira Code" :size 19))
+      doom-big-font (font-spec :family "Fira Code" :size 18))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -77,6 +77,11 @@
   :config
   (nyan-mode))
 
+;; folding
+(setq lsp-enable-folding t)
+(use-package! lsp-origami)
+(add-hook! 'lsp-after-open-hook #'lsp-origami-try-enable)
+
 ;; windows
 (use-package! windmove
  :bind
@@ -95,7 +100,7 @@
 (setq whitespace-line-column 80
       whitespace-style
       '(face lines-tail trailing))
-(setq-default fill-column 80)
+(setq-default fill-column 120)
 ;; turn on whitespace mode
 (global-whitespace-mode +1)
 ;; but not in org

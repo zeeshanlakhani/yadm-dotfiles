@@ -6,7 +6,10 @@
 (global-set-key (kbd "S-<down>") 'shrink-window)
 (global-set-key (kbd "S-<up>") 'enlarge-window)
 
-;; lines
+;; tab-bar
+(global-set-key (kbd "S-<tab>") 'tab-next)
+
+;; lines}
 (global-set-key (kbd "C-l") 'goto-line)
 
 ;; helm
