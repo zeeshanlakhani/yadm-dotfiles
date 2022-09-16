@@ -2,11 +2,13 @@ set -gx PATH $HOME/.emacs.d/bin $PATH
 set -gx PATH $HOME/.nimble/bin $PATH
 set -gx PATH $HOME/.elixirls/release $PATH
 
+set -gx CARGO_HOME $HOME/.cargo
+
 set -gx GOPATH $HOME/go
 set -gx GOROOT /usr/local/go
 set -gx PATH $GOPATH/bin $GOROOT/bin $PATH
 
-set -gx JAVA_HOME "/usr/libexec/java_home -v 1.8"
+set -gx JAVA_HOME (/usr/libexec/java_home -v 1.8)
 set -gx PATH $JAVA_HOME/bin $PATH
 
 set -gx PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
@@ -21,3 +23,5 @@ set -gx PATH /usr/local/smlnj/bin $PATH
 set -gx PATH $HOME/.asdf/installs/rust/*/bin $PATH
 set -gx PATH /usr/local/opt/bzip2/bin $PATH
 set -gx PATH /usr/local/opt/zlib $PATH
+
+set -gx KUBECONFIG $HOME/.kube/config

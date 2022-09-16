@@ -176,7 +176,7 @@ SETUVAR fish_pager_color_completion:B3A06D
 SETUVAR fish_pager_color_description:B3A06D
 SETUVAR fish_pager_color_prefix:cyan\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
-SETUVAR fish_user_paths:/usr/local/opt/libiconv/bin\x1e/usr/local/opt/bzip2/bin\x1e/Users/zeeshan/phd/twelf/bin\x1e/usr/local/opt/llvm/bin\x1e/usr/local/opt/fzf/bin
+SETUVAR fish_user_paths:/usr/local/opt/openssl\x403/bin\x1e/usr/local/opt/libiconv/bin\x1e/usr/local/opt/bzip2/bin\x1e/Users/zeeshan/phd/twelf/bin\x1e/usr/local/opt/llvm/bin\x1e/usr/local/opt/fzf/bin\x1e/Users/zeeshan/\x2ecargo/bin
 SETUVAR fisher_active_prompt:bobthefish
 SETUVAR fisher_dependency_count:z\x1ebass\x1ecprintf\x1efzf\x1erustup\x1ebobthefish\x1eupto\x1ebrew\x2dcompletions\x1ecolored_man_pages\x2efish
 SETUVAR pure_begin_prompt_with_current_directory:true

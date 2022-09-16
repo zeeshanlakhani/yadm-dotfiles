@@ -28,7 +28,7 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; se
 # ocaml/opam
 source /Users/zeeshan/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
-# asdf erlang/elixir
+# asdf rust/erlang/elixir
 source (brew --prefix asdf)/asdf.fish
 
 set -gx WASMTIME_HOME "$HOME/.wasmtime"
